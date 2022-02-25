@@ -18,13 +18,11 @@
         // 老的浏览器可能根本没有实现 mediaDevices，所以我们可以先设置一个空的对象
         if (navigator.mediaDevices === undefined) {
           navigator.mediaDevices = {};
-          alert("1");
         }
         // 一些浏览器部分支持 mediaDevices。我们不能直接给对象设置 getUserMedia
         // 因为这样可能会覆盖已有的属性。这里我们只会在没有getUserMedia属性的时候添加它。
         if (navigator.mediaDevices.getUserMedia === undefined) {
           navigator.mediaDevices.getUserMedia = function (constraints) {
-            alert("2");
             // 首先，如果有getUserMedia的话，就获得它
             var getUserMedia =
               navigator.getUserMedia ||
@@ -48,6 +46,7 @@
         navigator.mediaDevices
           .getUserMedia(constraints)
           .then(function (stream) {
+            alert("可以正常运行");
             var video = document.querySelector("video");
             // 旧的浏览器可能没有srcObject
             if ("srcObject" in video) {
